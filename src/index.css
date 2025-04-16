@@ -1,0 +1,498 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    @apply antialiased;
+    --color-primary: 74, 107, 247;
+    /* #4A6BF7 */
+    --color-success: 34, 197, 94;
+    /* #22C55E */
+    --color-warning: 234, 179, 8;
+    /* #EAB308 */
+    --color-danger: 239, 68, 68;
+    /* #EF4444 */
+    --color-info: 14, 165, 233;
+    /* #0EA5E9 */
+    --sidebar-from: 30, 64, 175;
+    /* blue-800 */
+    --sidebar-to: 23, 37, 84;
+    /* blue-950 */
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 transition-colors duration-200;
+  }
+
+  /* Fond dégradé en mode sombre pour l'ensemble du site */
+  .dark body {
+    background: linear-gradient(130deg, #0f172a 0%, #1e1e38 100%);
+    @apply text-gray-100 relative overflow-x-hidden;
+    min-height: 100vh;
+  }
+
+  /* Effet de dégradé dans le coin supérieur droit */
+  .dark body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30vw;
+    height: 30vh;
+    background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.15), rgba(30, 64, 175, 0.1) 30%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Effet de dégradé secondaire dans le coin inférieur gauche */
+  .dark body::before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 25vw;
+    height: 25vh;
+    background: radial-gradient(circle at bottom left, rgba(30, 64, 175, 0.1), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Assurer que le contenu reste au-dessus des effets de dégradé */
+  .dark #root {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Amélioration des scrollbars pour le dark mode */
+  .dark ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    @apply bg-blue-950/50;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-blue-700/70 rounded-full;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-blue-600/80;
+  }
+
+  /* Amélioration de la sélection de texte */
+  .dark ::selection {
+    @apply bg-blue-600/30 text-white;
+  }
+
+  /* Styles par défaut pour les éléments courants en dark mode */
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    @apply text-white;
+  }
+
+  .dark p,
+  .dark span,
+  .dark div:not(button):not(a) {
+    /* Texte par défaut - ajuster si nécessaire */
+    /* @apply text-gray-300; */
+  }
+
+  .dark a {
+    @apply text-blue-400 hover:text-blue-300;
+  }
+
+  .dark hr {
+    @apply border-blue-900/50;
+  }
+
+  .dark table {
+    @apply divide-blue-900/50;
+  }
+
+  .dark thead {
+    @apply bg-blue-900/50;
+  }
+
+  .dark th {
+    @apply text-blue-100;
+  }
+
+  .dark tbody tr:nth-child(even) {
+    /* Fond légèrement différent pour les lignes paires si souhaité */
+    @apply bg-blue-950/30;
+  }
+
+  .dark tbody tr:hover {
+    @apply bg-blue-800/30;
+  }
+
+  /* Styles pour les pages Templates et Historique */
+  .dark .template-card {
+    @apply bg-blue-900/20 backdrop-blur-sm border border-blue-900/50 hover:border-blue-500/50 shadow-lg shadow-blue-900/10 transition-all duration-300;
+  }
+
+  .dark .template-card-active {
+    @apply bg-gradient-to-br from-blue-800/50 to-blue-900/30 border-blue-500/50 shadow-lg shadow-blue-900/10;
+  }
+
+  .dark .history-row {
+    @apply hover:bg-blue-900/20 transition-colors duration-200;
+  }
+
+  .dark .history-table {
+    @apply bg-blue-950/30 backdrop-blur-sm border border-blue-900/50 shadow-lg rounded-xl overflow-hidden;
+  }
+
+  .dark .history-header {
+    @apply bg-blue-900/30 text-blue-100;
+  }
+
+  /* Style pour les templates en édition */
+  .dark .template-editor {
+    @apply bg-gradient-to-br from-gray-900 to-blue-950 border-2 border-blue-500/50 shadow-lg shadow-blue-900/10 rounded-xl;
+  }
+
+  /* Style pour les éditeurs d'email */
+  .dark .email-content-editor {
+    @apply bg-blue-950/30 border border-blue-900/50 focus:border-blue-500 focus:ring focus:ring-blue-500/20 rounded-lg;
+  }
+
+  /* Amélioration de la visualisation du message */
+  .dark .email-preview {
+    @apply bg-blue-950/30 backdrop-blur-sm border border-blue-900/50 rounded-lg p-4;
+  }
+
+  /* Effet de carte glassmorphism amélioré */
+  .dark .card-glass {
+    @apply bg-blue-950/30 backdrop-blur-md border border-blue-900/50 shadow-lg shadow-blue-900/10;
+  }
+}
+
+/* Styles spécifiques pour le dark mode */
+.dark .dark\:divide-gray-700> :not([hidden])~ :not([hidden]) {
+  @apply divide-blue-900/50;
+}
+
+.dark .dark\:bg-gray-800 {
+  @apply bg-blue-900/20;
+}
+
+.dark .dark\:bg-gray-900 {
+  @apply bg-blue-950/20;
+}
+
+.dark .dark\:text-gray-100 {
+  @apply text-gray-100;
+}
+
+.dark .dark\:text-gray-200 {
+  @apply text-gray-200;
+}
+
+.dark .dark\:text-gray-300 {
+  @apply text-gray-300;
+}
+
+.dark .dark\:text-gray-400 {
+  @apply text-gray-400;
+}
+
+.dark .dark\:border-gray-700 {
+  @apply border-gray-700;
+}
+
+.dark .dark\:border-gray-600 {
+  @apply border-gray-600;
+}
+
+.dark .dark\:hover\:bg-gray-700:hover {
+  @apply hover:bg-gray-700;
+}
+
+.dark .dark\:hover\:bg-gray-800:hover {
+  @apply hover:bg-gray-800;
+}
+
+.dark .dark\:hover\:bg-gray-600:hover {
+  @apply hover:bg-blue-800/60;
+}
+
+/* Styles des cartes et panneaux - Fond principal */
+.dark .card,
+.dark .panel,
+.dark .bg-white {
+  @apply bg-blue-950/30 border-blue-900/50 shadow-md shadow-blue-950/20;
+}
+
+/* Fond légèrement plus clair pour éléments imbriqués */
+.dark .bg-gray-50 {
+  @apply bg-blue-900/30;
+}
+
+.dark .bg-gray-100 {
+  @apply bg-blue-900/40;
+}
+
+/* Styles des inputs et selects */
+.dark .input,
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="number"],
+.dark input[type="tel"],
+.dark input[type="url"],
+.dark input[type="date"],
+.dark textarea,
+.dark select {
+  /* Fond sombre, texte clair, bordure visible */
+  @apply bg-blue-950/40 border-blue-900/60 text-blue-100 placeholder-blue-400/50 focus:border-blue-500 focus:ring-blue-500/30;
+}
+
+.dark select {
+  /* Style spécifique pour les flèches de select */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b98ff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Styles des boutons */
+.dark .button-primary,
+.dark button[type="submit"].bg-blue-600 {
+  /* Cibler les boutons primaires communs */
+  background: linear-gradient(to right, rgb(30, 64, 175), rgb(37, 99, 235));
+  /* équivalent à gradient-to-r from-blue-800 to-blue-600 */
+  color: white;
+  border-color: transparent;
+  @apply shadow-md shadow-blue-800/30;
+}
+
+.dark .button-primary:hover,
+.dark button[type="submit"].bg-blue-600:hover {
+  background: linear-gradient(to right, rgb(29, 78, 216), rgb(59, 130, 246));
+  /* équivalent à gradient-to-r from-blue-700 to-blue-500 */
+  @apply shadow-lg shadow-blue-700/30;
+}
+
+.dark .button-secondary,
+.dark button:not([type="submit"]).border-gray-300 {
+  /* Cibler les boutons secondaires communs */
+  @apply bg-blue-900/50 hover:bg-blue-800/60 text-blue-100 border-blue-700/50;
+}
+
+.dark .button-tertiary,
+.dark button.text-gray-600 {
+  /* Cibler les boutons tertiaires/discrets */
+  @apply text-blue-300 hover:text-blue-100 hover:bg-blue-900/50;
+}
+
+/* Animation pour les transitions */
+.transition-theme {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+/* Effet glassmorphism */
+.dark .glassmorphism {
+  @apply bg-blue-950/30 backdrop-blur-md border border-blue-900/50;
+}
+
+/* Styles des badges */
+.dark .badge {
+  @apply bg-blue-900/50 text-blue-200;
+}
+
+.dark .badge-primary {
+  @apply bg-blue-600/20 text-blue-300;
+}
+
+.dark .badge-success {
+  @apply bg-green-600/20 text-green-300;
+}
+
+.dark .badge-warning {
+  @apply bg-yellow-600/20 text-yellow-300;
+}
+
+.dark .badge-danger {
+  @apply bg-red-600/20 text-red-300;
+}
+
+/* Styles specifiques pour la page Settings */
+.dark .settings-card {
+  @apply bg-blue-950/30 border-blue-900/50 rounded-xl;
+}
+
+.dark .settings-header {
+  @apply text-white border-blue-900/50;
+}
+
+.dark .settings-content {
+  @apply text-blue-100;
+}
+
+/* Style pour le sélecteur de thème (Utilisé par Settings.tsx) */
+.dark .theme-selector-button {
+  @apply bg-blue-950/40 border-blue-900/50 text-blue-300 hover:bg-blue-900/50 hover:text-blue-100;
+}
+
+.dark .theme-selector-button.active {
+  @apply bg-blue-800/50 border-blue-500 text-blue-300 ring-2 ring-blue-500/30;
+}
+
+/* Correction pour les problèmes de visibilité du texte en mode sombre */
+.dark .text-gray-900 {
+  @apply text-gray-100;
+}
+
+.dark .text-gray-800 {
+  @apply text-gray-200;
+}
+
+.dark .text-gray-700 {
+  @apply text-gray-300;
+}
+
+.dark .text-gray-600 {
+  @apply text-gray-400;
+}
+
+/* Fix spécifique pour les liens dans la barre latérale des paramètres */
+.dark a div p.text-gray-900 {
+  @apply text-gray-100;
+}
+
+.dark a div p.text-gray-500 {
+  @apply text-gray-400;
+}
+
+/* Fix pour les textes dans les tables d'historique et de templates */
+.dark tbody .text-gray-900 {
+  @apply text-gray-100;
+}
+
+.dark tbody .text-gray-700 {
+  @apply text-gray-300;
+}
+
+.dark table th.text-gray-500 {
+  @apply text-gray-300;
+}
+
+/* Carte de statistique avec dégradé bleu */
+.dark .stat-card {
+  background: linear-gradient(145deg, #1e3a8a 0%, #172554 100%);
+  @apply border border-blue-700/30 shadow-lg shadow-blue-900/20 rounded-xl overflow-hidden backdrop-blur-sm;
+}
+
+/* Dégradé bleu pour certaines sections importantes */
+.dark .blue-gradient-card {
+  background: linear-gradient(145deg, #1e3a8a 0%, #172554 100%);
+  @apply border border-blue-700/30 shadow-lg shadow-blue-900/15 rounded-xl overflow-hidden;
+}
+
+/* Renforcer les bordures avec une touche de bleu */
+.dark .card-highlight {
+  @apply border-blue-500/40 shadow-blue-900/15;
+}
+
+/* Section d'activité avec un fond dégradé plus subtil */
+.dark .activity-card {
+  background: linear-gradient(160deg, #1e3a8a 0%, #172554 90%);
+  @apply border border-blue-800/30 shadow-lg shadow-blue-900/10 rounded-xl;
+}
+
+/* Style pour les indicateurs de statut, reprise du bleu dégradé */
+.dark .status-indicator {
+  @apply bg-gradient-to-r from-blue-600 to-blue-800 rounded-full w-2 h-2;
+}
+
+/* Barre de navigation avec dégradé bleu */
+.dark .sidebar {
+  background: linear-gradient(180deg, #1e3a8a 0%, #172554 100%);
+  @apply border-r border-blue-900/50;
+}
+
+/* Style pour les widgets de contenu */
+.dark .dashboard-widget {
+  background: linear-gradient(145deg, rgba(30, 58, 138, 0.3) 0%, rgba(23, 37, 84, 0.3) 100%);
+  @apply backdrop-blur-sm border border-blue-900/40 rounded-xl overflow-hidden shadow-lg shadow-blue-900/10;
+}
+
+/* Style pour les prochaines relances */
+.dark .upcoming-followups {
+  background: linear-gradient(145deg, #1e3a8a20 0%, #17255430 100%);
+  @apply border border-blue-900/30 rounded-xl overflow-hidden shadow-lg shadow-blue-900/10;
+}
+
+/* Style pour les lignes de prochaines relances */
+.dark .followup-item {
+  @apply border-l-2 border-blue-500/50 pl-4 py-2;
+}
+
+/* Style pour les badges avec dégradé */
+.dark .gradient-badge {
+  @apply bg-gradient-to-r from-blue-600 to-blue-800 text-white text-xs px-2 py-1 rounded-full font-medium shadow-sm shadow-blue-900/20;
+}
+
+/* Boutons principaux avec dégradé */
+.dark .gradient-button {
+  @apply bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white rounded-lg transition-all duration-300 shadow-sm shadow-blue-900/20 hover:shadow-md hover:shadow-blue-900/30;
+}
+
+/* Animations pour la landing page */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes pulse-scroll {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-pulse-scroll {
+  animation: pulse-scroll 1.5s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
