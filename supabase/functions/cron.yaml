@@ -1,0 +1,16 @@
+# Format du crontab: [minute] [heure] [jour_du_mois] [mois] [jour_de_la_semaine]
+# Valeurs possibles:
+#   minute: 0-59
+#   heure: 0-23
+#   jour_du_mois: 1-31
+#   mois: 1-12
+#   jour_de_la_semaine: 0-6 (0 = dimanche)
+#
+# Plus d'informations: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+
+functions:
+  - name: send-scheduled-emails 
+    schedule: '0 9 * * *'      # Exécuter tous les jours à 9h00
+  
+  - name: send-scheduled-emails
+    schedule: '0 16 * * *'     # Exécuter tous les jours à 16h00 
